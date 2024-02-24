@@ -1,13 +1,14 @@
-import Image from "next/image";
-import { background } from "~/lib/assets/images";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { Button } from "../ui/button";
-import GoogleIcon from "../ui/icons/google";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
+
+import { Button } from "../ui/button"
+import { Card, CardContent, CardHeader } from "../ui/card"
+import GoogleIcon from "../ui/icons/google"
+import { background } from "~/lib/assets/images"
 
 export default function Register() {
   return (
-    <div className="min-h-screen w-full relative flex flex-col items-center justify-center p-3">
+    <div className="relative flex min-h-screen w-full flex-col items-center justify-center p-3">
       <Image
         src={background}
         alt="beautiful coffeeshop"
@@ -15,10 +16,10 @@ export default function Register() {
         objectFit="cover"
         objectPosition="right"
       />
-      <div className="bg-black/50 absolute h-full w-full z-10" />
-      <Card className="z-20 site-section">
+      <div className="absolute z-10 size-full bg-black/50" />
+      <Card className="site-section z-20">
         <CardHeader>
-          <h1 className="text-lg text-center">
+          <h1 className="text-center text-lg">
             Hi, Selamat Datang di <br />
             <strong className="text-3xl font-semibold text-primary">
               Coffeeshopedia
@@ -26,17 +27,17 @@ export default function Register() {
           </h1>
         </CardHeader>
         <CardContent>
-          <Button className="w-full flex flex-row justify-center items-center gap-2">
+          <Button className="flex w-full flex-row items-center justify-center gap-2">
             <GoogleIcon width={20} height={20} /> Sign up using Google
           </Button>
-          <p className="text-sm mt-2 text-center">
+          <p className="mt-2 text-center text-sm">
             Already have an account?{" "}
-            <Link href="/login" className="text-primary font-semibold">
+            <Link href="/login" className="font-semibold text-primary">
               Log in
             </Link>
           </p>
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

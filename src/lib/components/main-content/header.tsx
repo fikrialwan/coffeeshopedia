@@ -1,3 +1,3 @@
 export default function PublicHeader() {
-  return <header>Header</header>;
+  return <header>Header</header>
 }

@@ -1,3 +1,3 @@
 export default function CMSSidebar() {
-  return <aside>Sidebar</aside>;
+  return <aside>Sidebar</aside>
 }

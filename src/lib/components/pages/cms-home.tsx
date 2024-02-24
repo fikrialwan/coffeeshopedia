@@ -3,5 +3,5 @@ export default function CMSHome() {
     <div>
       <h1>Home of CMS</h1>
     </div>
-  );
+  )
 }

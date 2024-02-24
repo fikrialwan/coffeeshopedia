@@ -1,4 +1,4 @@
-import CMSSidebar from "~/lib/components/cms/sidebar";
+import CMSSidebar from "~/lib/components/cms/sidebar"
 
 export default function CMSLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -6,5 +6,5 @@ export default function CMSLayout({ children }: { children: React.ReactNode }) {
       <CMSSidebar />
       {children}
     </div>
-  );
+  )
 }
