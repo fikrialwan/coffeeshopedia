@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { cn } from "~/lib/utils";
+import { fontJakarta } from "~/styles/font";
 import "~/styles/globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Coffeeshopedia",
@@ -16,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={cn(fontJakarta.variable, "font-jakarta")}>
+        {children}
+      </body>
     </html>
   );
 }
