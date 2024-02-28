@@ -31,7 +31,7 @@ export default function CoffeeshopDataTable<TData, TValue>({
       })
      
       return (
-        <div className="rounded-md border">
+        <div>
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
