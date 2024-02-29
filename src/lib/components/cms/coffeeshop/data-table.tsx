@@ -88,7 +88,9 @@ export default function CoffeeshopDataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-      {columns.length > 0 && <PaginationComp table={table} />}
+      {columns.length > 0 && (
+        <PaginationComp table={table} pagination={pagination} />
+      )}
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
-import ReactQueryProvider from "~/lib/providers/react-query-provider"
 
+import ReactQueryProvider from "~/lib/providers/react-query-provider"
 import { cn } from "~/lib/utils"
 import { fontJakarta } from "~/styles/font"
 import "~/styles/globals.css"
