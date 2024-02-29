@@ -3,10 +3,15 @@
 import {
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import type { ColumnDef, PaginationState } from "@tanstack/react-table"
+import type {
+  ColumnDef,
+  ColumnFiltersState,
+  PaginationState,
+} from "@tanstack/react-table"
 import { useState } from "react"
 
 import {
@@ -19,6 +24,7 @@ import {
 } from "~/lib/components/ui/table"
 
 import PaginationComp from "./pagination"
+import { Input } from "../../ui/input"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -32,6 +38,7 @@ export default function CoffeeshopDataTable<TData, TValue>({
     pageIndex: 0,
     pageSize: 5,
   })
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
   const table = useReactTable({
     data,
@@ -39,13 +46,26 @@ export default function CoffeeshopDataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     state: {
       pagination,
+      columnFilters,
     },
   })
 
   return (
     <div>
+      <div className="mb-2 flex flex-row justify-end">
+        <Input
+          placeholder="Search by name"
+          className="w-full max-w-xs"
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("name")?.setFilterValue(event.target.value)
+          }
+        />
+      </div>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
