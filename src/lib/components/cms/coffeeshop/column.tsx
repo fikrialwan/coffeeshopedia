@@ -13,6 +13,7 @@ import {
   AlertDialogAction,
 } from "../../ui/alert-dialog"
 import { Button } from "../../ui/button"
+import Link from "next/link"
 
 type CoffeeshopTypes = {
   id: string
@@ -50,26 +51,31 @@ export const columnsCoffeeshop: ColumnDef<CoffeeshopTypes>[] = [
     cell: ({ row }) => {
       const coffeeshop = row.original
       return (
-        <AlertDialog>
-          <Button asChild variant="destructive">
-            <AlertDialogTrigger>Delete</AlertDialogTrigger>
+        <div className="flex flex-row gap-2">
+          <Button asChild variant="secondary">
+            <Link href={"/cms/coffeeshop/edit/" + coffeeshop.id}>Edit</Link>
           </Button>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete{" "}
-                {coffeeshop.name} and remove your data from our servers.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <Button asChild variant="destructive">
-                <AlertDialogAction> Continue</AlertDialogAction>
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+          <AlertDialog>
+            <Button asChild variant="destructive">
+              <AlertDialogTrigger>Delete</AlertDialogTrigger>
+            </Button>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete{" "}
+                  {coffeeshop.name} and remove your data from our servers.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <Button asChild variant="destructive">
+                  <AlertDialogAction> Continue</AlertDialogAction>
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
       )
     },
   },
