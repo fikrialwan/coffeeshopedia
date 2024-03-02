@@ -23,7 +23,7 @@ export default function CMSCoffeeshop() {
       <CardHeader className="text-2xl text-primary">List Coffeshop</CardHeader>
       <CardContent>
         <AddNewCoffeshop />
-        {isLoading && <div>Loading books...</div>}
+        {isLoading && <div>Loading coffeeshop...</div>}
         {listCoffeeshop && (
           <CoffeeshopDataTable
             data={listCoffeeshop}
