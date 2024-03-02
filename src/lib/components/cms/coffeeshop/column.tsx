@@ -15,6 +15,8 @@ import {
 import { Button } from "../../ui/button"
 import Link from "next/link"
 import { CoffeeshopTypes } from "~/lib/utils/types"
+import { useDeleteCoffeeshopMutation } from "~/lib/hooks/coffeeshop.hooks"
+import { useRouter } from "next/navigation"
 
 export const columnsCoffeeshop: ColumnDef<CoffeeshopTypes>[] = [
   {
@@ -42,6 +44,10 @@ export const columnsCoffeeshop: ColumnDef<CoffeeshopTypes>[] = [
     header: "Action",
     cell: ({ row }) => {
       const coffeeshop = row.original
+
+      const router = useRouter()
+      const { mutateAsync, isIdle } = useDeleteCoffeeshopMutation()
+
       return (
         <div className="flex flex-row gap-2">
           <Button asChild variant="secondary">
@@ -62,7 +68,20 @@ export const columnsCoffeeshop: ColumnDef<CoffeeshopTypes>[] = [
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <Button asChild variant="destructive">
-                  <AlertDialogAction> Continue</AlertDialogAction>
+                  <AlertDialogAction
+                    onClick={async () => {
+                      await mutateAsync(coffeeshop.id, {
+                        onSuccess: () => {},
+                        onError: (error) => {
+                          console.error("Error adding coffeeshop:", error)
+                        },
+                      })
+                    }}
+                    disabled={!isIdle}
+                  >
+                    {" "}
+                    Continue
+                  </AlertDialogAction>
                 </Button>
               </AlertDialogFooter>
             </AlertDialogContent>

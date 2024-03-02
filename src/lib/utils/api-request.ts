@@ -5,8 +5,8 @@ const coffeeshopAPIUrl = BASE_URL + "/coffeeshop"
 
 export async function getCoffeeshopList() {
   const res = await fetch(coffeeshopAPIUrl)
-  const coffeeshop = (await res.json()) as CoffeeshopTypes[]
-  return coffeeshop
+  const coffeeshopList = (await res.json()) as CoffeeshopTypes[]
+  return coffeeshopList.filter((coffeeshop) => coffeeshop.id)
 }
 
 export async function getCoffeeshopById(id: string) {
@@ -55,7 +55,29 @@ export async function updateCoffeeshop(payload: CoffeeshopTypes) {
   })
 
   if (!response.ok) {
-    throw new Error("Failed to add the coffeeshop")
+    throw new Error("Failed to update the coffeeshop")
+  }
+
+  return await response.json()
+}
+
+export async function deleteCoffeeshop(id: string) {
+  const body = {
+    condition: {
+      id,
+    },
+  }
+
+  const response = await fetch(coffeeshopAPIUrl, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+
+  if (!response.ok) {
+    throw new Error("Failed to delete the coffeeshop")
   }
 
   return await response.json()

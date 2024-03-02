@@ -1,5 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { addCoffeeshop, updateCoffeeshop } from "../utils/api-request"
+import {
+  addCoffeeshop,
+  deleteCoffeeshop,
+  updateCoffeeshop,
+} from "../utils/api-request"
 
 export function useAddCoffeeshopMutation() {
   const queryClient = useQueryClient()
@@ -24,7 +28,21 @@ export function useUpdateCoffeeshopMutation() {
       queryClient.invalidateQueries({ queryKey: ["coffeeshop-list"] })
     },
     onError: (error) => {
-      console.error("Error adding coffeeshop:", error)
+      console.error("Error updating coffeeshop:", error)
+    },
+  })
+}
+
+export function useDeleteCoffeeshopMutation() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: deleteCoffeeshop,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["coffeeshop-list"] })
+    },
+    onError: (error) => {
+      console.error("Error deleting coffeeshop:", error)
     },
   })
 }
