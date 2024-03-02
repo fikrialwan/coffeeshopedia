@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 
+import ReactQueryProvider from "~/lib/providers/react-query-provider"
 import { cn } from "~/lib/utils"
 import { fontJakarta } from "~/styles/font"
 import "~/styles/globals.css"
@@ -17,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(fontJakarta.variable, "font-jakarta")}>
-        {children}
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   )

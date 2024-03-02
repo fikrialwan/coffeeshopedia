@@ -4,6 +4,7 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-uses-react": "off",
     "jsx-a11y/heading-has-content": "off",
+    "allowElseIf": true,
     "prettier/prettier": [
       "error",
       {
