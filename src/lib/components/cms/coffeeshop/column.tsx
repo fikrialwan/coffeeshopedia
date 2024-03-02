@@ -17,6 +17,8 @@ import Link from "next/link"
 import { CoffeeshopTypes } from "~/lib/utils/types"
 import { useDeleteCoffeeshopMutation } from "~/lib/hooks/coffeeshop.hooks"
 import { useRouter } from "next/navigation"
+import { useToast } from "../../ui/use-toast"
+import { ToastAction } from "@radix-ui/react-toast"
 
 export const columnsCoffeeshop: ColumnDef<CoffeeshopTypes>[] = [
   {
@@ -45,7 +47,7 @@ export const columnsCoffeeshop: ColumnDef<CoffeeshopTypes>[] = [
     cell: ({ row }) => {
       const coffeeshop = row.original
 
-      const router = useRouter()
+      const { toast } = useToast()
       const { mutateAsync, isIdle } = useDeleteCoffeeshopMutation()
 
       return (
@@ -71,9 +73,24 @@ export const columnsCoffeeshop: ColumnDef<CoffeeshopTypes>[] = [
                   <AlertDialogAction
                     onClick={async () => {
                       await mutateAsync(coffeeshop.id, {
-                        onSuccess: () => {},
+                        onSuccess: () => {
+                          toast({
+                            variant: "success",
+                            title: "Success",
+                            description: "Coffeeshop deleted successfully",
+                          })
+                        },
                         onError: (error) => {
-                          console.error("Error adding coffeeshop:", error)
+                          toast({
+                            variant: "destructive",
+                            title: "Uh oh! Something went wrong.",
+                            description: error.message,
+                            action: (
+                              <ToastAction altText="Try again">
+                                Try again
+                              </ToastAction>
+                            ),
+                          })
                         },
                       })
                     }}

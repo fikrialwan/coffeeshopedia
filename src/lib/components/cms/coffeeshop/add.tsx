@@ -18,8 +18,11 @@ import { Form, FormControl, FormField, FormMessage } from "../../ui/form"
 import { Label } from "../../ui/label"
 import { useAddCoffeeshopMutation } from "~/lib/hooks/coffeeshop.hooks"
 import { CoffeeshopTypes } from "~/lib/utils/types"
+import { useToast } from "../../ui/use-toast"
+import { ToastAction } from "@radix-ui/react-toast"
 
 export default function AddNewCoffeshop() {
+  const { toast } = useToast()
   const buttonCloseRef = useRef<HTMLButtonElement>(null)
   const form = useForm<z.infer<typeof formAddCoffeeshopSchema>>({
     resolver: zodResolver(formAddCoffeeshopSchema),
@@ -33,10 +36,19 @@ export default function AddNewCoffeshop() {
       onSuccess: () => {
         form.reset()
         buttonCloseRef.current?.click()
-        console.log("Coffeeshop added successfully")
+        toast({
+          variant: "success",
+          title: "Success",
+          description: "Coffeeshop added successfully",
+        })
       },
       onError: (error) => {
-        console.error("Error adding coffeeshop:", error)
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: error.message,
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        })
       },
     })
   }

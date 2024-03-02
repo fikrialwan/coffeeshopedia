@@ -12,6 +12,8 @@ import { CoffeeshopTypes } from "~/lib/utils/types"
 import { useRouter } from "next/navigation"
 import { Form, FormControl, FormField, FormMessage } from "../../ui/form"
 import { Label } from "../../ui/label"
+import { useToast } from "../../ui/use-toast"
+import { ToastAction } from "../../ui/toast"
 
 interface EditCoffeeshopFormProps {
   id: string
@@ -31,6 +33,7 @@ export default function EditCoffeeshopForm({
   urlMaps,
 }: EditCoffeeshopFormProps) {
   const router = useRouter()
+  const { toast } = useToast()
   const form = useForm<z.infer<typeof formUpdateCoffeeshopSchema>>({
     resolver: zodResolver(formUpdateCoffeeshopSchema),
     defaultValues: {
@@ -46,10 +49,20 @@ export default function EditCoffeeshopForm({
     await mutateAsync({ ...data, id } as CoffeeshopTypes, {
       onSuccess: () => {
         form.reset()
+        toast({
+          variant: "success",
+          title: "Success",
+          description: "Coffeeshop updated successfully",
+        })
         router.replace("/cms/coffeeshop")
       },
       onError: (error) => {
-        console.error("Error adding coffeeshop:", error)
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: error.message,
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        })
       },
     })
   }
