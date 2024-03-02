@@ -14,15 +14,7 @@ import {
 } from "../../ui/alert-dialog"
 import { Button } from "../../ui/button"
 import Link from "next/link"
-
-type CoffeeshopTypes = {
-  id: string
-  name: string
-  description: string
-  facility: string
-  address: string
-  urlMaps: string
-}
+import { CoffeeshopTypes } from "~/lib/utils/types"
 
 export const columnsCoffeeshop: ColumnDef<CoffeeshopTypes>[] = [
   {
