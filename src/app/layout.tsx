@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Toaster } from "~/lib/components/ui/toaster"
 
 import ReactQueryProvider from "~/lib/providers/react-query-provider"
 import { cn } from "~/lib/utils"
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(fontJakarta.variable, "font-jakarta")}>
         <ReactQueryProvider>{children}</ReactQueryProvider>
+        <Toaster />
       </body>
     </html>
   )
