@@ -26,6 +26,7 @@ export function useUpdateCoffeeshopMutation() {
     mutationFn: updateCoffeeshop,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["coffeeshop-list"] })
+      queryClient.invalidateQueries({ queryKey: ["coffeeshop"] })
     },
     onError: (error) => {
       console.error("Error updating coffeeshop:", error)
