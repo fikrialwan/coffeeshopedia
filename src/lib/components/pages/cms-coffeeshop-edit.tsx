@@ -31,7 +31,7 @@ export default function CMSCoffeeshopEdit({ id }: EditCoffeeshopFormProps) {
             name={coffeeshop?.name || ""}
             description={coffeeshop?.description || ""}
             address={coffeeshop?.address || ""}
-            facility={coffeeshop?.address || ""}
+            facility={coffeeshop?.facility || ""}
             urlMaps={coffeeshop?.urlMaps || ""}
           />
         )}
