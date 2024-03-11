@@ -9,6 +9,7 @@ import "~/styles/globals.css"
 export const metadata: Metadata = {
   title: "Coffeeshopedia",
   description: "Site for list of coffeeshopedia",
+  metadataBase: new URL("https://coffeeshopedia.vercel.com/"),
   authors: [
     {
       name: "Fikri Alwan Ramadhan",
